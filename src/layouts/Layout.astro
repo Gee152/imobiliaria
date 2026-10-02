@@ -1,0 +1,117 @@
+---
+import '../styles/global.css';
+import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = "Tatiana Cavalcanti | Corretora de Imóveis em Recife (CRECI 8988)",
+  description = "Encontre seu próximo imóvel na Zona Norte do Recife com Tatiana Cavalcanti. 15 anos de experiência e acompanhamento do interesse ao registro. Só é dono quem registra.",
+  ogImage = "/images/og-tatiana.jpg"
+} = Astro.props;
+
+const siteUrl = "https://tatianacavalcanti.com.br";
+const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+
+const schemaOrg = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["RealEstateAgent", "Person"],
+      "@id": `${siteUrl}/#agent`,
+      "name": "Tatiana Cavalcanti",
+      "jobTitle": "Corretora de Imóveis",
+      "description": "Corretora de imóveis com 15 anos de experiência especializada na Zona Norte do Recife. Te guio do interesse ao registro.",
+      "telephone": "+5581997459932",
+      "identifier": "CRECI 8988",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Recife",
+        "addressRegion": "PE",
+        "addressCountry": "BR"
+      },
+      "areaServed": [
+        "Casa Forte",
+        "Poço da Panela",
+        "Graças",
+        "Espinheiro",
+        "Aflitos",
+        "Jaqueira",
+        "Tamarineira",
+        "Parnamirim",
+        "Santana",
+        "Monteiro",
+        "Casa Amarela"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/tatianacavalcanti.imoveis"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      "url": siteUrl,
+      "name": "Tatiana Cavalcanti Imóveis",
+      "description": description,
+      "publisher": {
+        "@id": `${siteUrl}/#agent`
+      }
+    }
+  ]
+};
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="sitemap" href="/sitemap.xml" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt" />
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="corretora de imoveis recife, imoveis zona norte recife, apartamento casa forte, imoveis poco da panela, graças recife, espinheiro, creci 8988 recife, financiamento imobiliario recife" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Tatiana Cavalcanti Imóveis" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
+
+    <!-- Google Fonts Preconnect & Styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Structured Data (JSON-LD) for E-E-A-T and Local SEO -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
+  </head>
+  <body class="min-h-screen bg-[#FAF7F2] text-[#1F1C1A] antialiased selection:bg-[#351F16] selection:text-[#FAF7F2]">
+    <slot />
+    <FloatingWhatsApp />
+    <script src="../scripts/scrollManager.ts"></script>
+  </body>
+</html>

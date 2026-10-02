@@ -1,0 +1,239 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-cacao-deep: #1A0E09;
+    --color-cacao-dark: #26160F;
+    --color-cacao: #351F16;
+    --color-cacao-light: #4A2E22;
+    --color-cream-bg: #FAF7F2;
+    --color-cream-surface: #F2ECE3;
+    --color-cream-border: #E5DBD0;
+    --color-terracotta: #C85A32;
+    --color-terracotta-hover: #AB4823;
+    --color-mustard: #C49138;
+    --color-charcoal: #1F1C1A;
+    --color-muted: #6E6760;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    background-color: var(--color-cream-bg);
+    color: var(--color-charcoal);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom selection */
+  ::selection {
+    background-color: #351F16;
+    color: #FAF7F2;
+  }
+}
+
+/* Typography Utility Classes */
+.font-display {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+/* Mobile-first touch targets */
+.touch-target {
+  min-height: 48px;
+  min-width: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hide scrollbar for clean horizontal scrolls if needed */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ==========================================================================
+   SCROLL REVEAL & DYNAMIC CARD ANIMATIONS
+   Sophisticated, 60fps luxury real estate motion with spring physics
+   ========================================================================== */
+
+/* Base hidden state for scroll reveal elements */
+.scroll-reveal {
+  opacity: 0;
+  will-change: transform, opacity;
+  transition-property: opacity, transform;
+  transition-duration: 1500ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Side Slide: Left */
+.scroll-reveal-left {
+  opacity: 0;
+  transform: translate3d(-54px, 0, 0);
+  will-change: transform, opacity;
+  transition-property: opacity, transform;
+  transition-duration: 1550ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Side Slide: Right */
+.scroll-reveal-right {
+  opacity: 0;
+  transform: translate3d(54px, 0, 0);
+  will-change: transform, opacity;
+  transition-property: opacity, transform;
+  transition-duration: 1550ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Side Down: Enters sliding down from above */
+.scroll-reveal-down {
+  opacity: 0;
+  transform: translate3d(0, -50px, 0);
+  will-change: transform, opacity;
+  transition-property: opacity, transform;
+  transition-duration: 1500ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Slide Up: Enters sliding up from below */
+.scroll-reveal-up {
+  opacity: 0;
+  transform: translate3d(0, 50px, 0);
+  will-change: transform, opacity;
+  transition-property: opacity, transform;
+  transition-duration: 1500ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Revealed state triggered by IntersectionObserver */
+.scroll-reveal.is-revealed,
+.scroll-reveal-left.is-revealed,
+.scroll-reveal-right.is-revealed,
+.scroll-reveal-down.is-revealed,
+.scroll-reveal-up.is-revealed {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+/* Stagger Delays for natural, clearly perceptible cascading entries (+15% slower cadence) */
+.delay-75 { transition-delay: 140ms; }
+.delay-100 { transition-delay: 230ms; }
+.delay-150 { transition-delay: 400ms; }
+.delay-200 { transition-delay: 580ms; }
+.delay-250 { transition-delay: 750ms; }
+.delay-300 { transition-delay: 920ms; }
+.delay-350 { transition-delay: 1100ms; }
+.delay-400 { transition-delay: 1280ms; }
+.delay-500 { transition-delay: 1500ms; }
+
+/* Dynamic Interactive Cards: Elevated hover, silky border transition, spring physics */
+.card-dynamic {
+  transition: transform 0.46s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.46s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.35s ease;
+  will-change: transform, box-shadow;
+}
+
+.card-dynamic:hover {
+  transform: translate3d(0, -6px, 0);
+  box-shadow: 0 20px 30px -10px rgba(38, 22, 15, 0.1), 0 10px 15px -5px rgba(38, 22, 15, 0.05);
+}
+
+/* Parallax Elements */
+[data-parallax] {
+  will-change: transform;
+}
+
+/* Accessibility: Gentle subtle movement while preserving silky smooth transitions */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal,
+  .scroll-reveal-left,
+  .scroll-reveal-right,
+  .scroll-reveal-down,
+  .scroll-reveal-up {
+    transition-duration: 1500ms !important;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  .scroll-reveal-left { transform: translate3d(-24px, 0, 0); }
+  .scroll-reveal-right { transform: translate3d(24px, 0, 0); }
+  .scroll-reveal-down { transform: translate3d(0, -24px, 0); }
+  .scroll-reveal-up { transform: translate3d(0, 24px, 0); }
+
+  .side-down-dynamic,
+  .converge-drop {
+    transform: translate3d(0, -32px, 0);
+    transition: opacity 1600ms ease-out, transform 1950ms ease-out;
+  }
+  .converge-rise {
+    transform: translate3d(0, 32px, 0);
+    transition: opacity 1600ms ease-out, transform 1950ms ease-out;
+  }
+  .cinematic-unlocked .side-down-dynamic,
+  .cinematic-unlocked .converge-drop,
+  .cinematic-unlocked .converge-rise {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) !important;
+  }
+}
+
+/* ==========================================================================
+   CINEMATIC UNLOCK & CONVERGENT HYBRID MOTION
+   Upper elements fall (drop) and lower elements rise to meet in the center
+   with calibrated spring dampening
+   ========================================================================== */
+
+/* Side Down Dynamic: Enters sliding down from above with spring physics on first scroll */
+.side-down-dynamic,
+.converge-drop {
+  opacity: 0;
+  transform: translate3d(0, -68px, 0);
+  will-change: transform, opacity;
+  transition: opacity 1600ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1950ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Convergent Rise (starts positioned below with opacity 0) */
+.converge-rise {
+  opacity: 0;
+  transform: translate3d(0, 64px, 0);
+  will-change: transform, opacity;
+  transition: opacity 1600ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1950ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Unlocked states: triggered smoothly when cinematic-unlocked is active */
+.cinematic-unlocked .side-down-dynamic,
+.cinematic-unlocked .converge-drop,
+.cinematic-unlocked .converge-rise {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+/* Metric Counter glow & styling */
+.metric-counter {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  transition: color 0.4s ease, transform 0.3s ease;
+}
+
+.metric-counter.counter-finished {
+  animation: counter-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.25);
+}
+
+@keyframes counter-pop {
+  0% { transform: scale(0.92); }
+  50% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+

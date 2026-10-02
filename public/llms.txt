@@ -1,0 +1,21 @@
+# Tatiana Cavalcanti Imóveis
+
+> Plataforma web imobiliária de alto padrão desenvolvida em Astro, Tailwind CSS e React, especializada na curadoria de imóveis residenciais na Zona Norte do Recife (PE).
+> Integra catálogo interativo de propriedades, consultoria jurídica patrimonial (CRECI 8988) e canais diretos de qualificação e atendimento consultivo via WhatsApp.
+
+## Rotas e Recursos (Markdown)
+
+- [Página Inicial & Visão Geral](https://tatianacavalcanti.com.br/docs/home.md): Apresentação institucional, posicionamento "Só é dono quem registra" e panorama dos serviços imobiliários de Tatiana Cavalcanti.
+- [Catálogo de Imóveis](https://tatianacavalcanti.com.br/docs/imoveis.md): Inventário completo de apartamentos, coberturas e casas de médio e alto padrão disponíveis na Zona Norte do Recife com especificações técnicas e valores.
+- [Guia dos Bairros da Zona Norte](https://tatianacavalcanti.com.br/docs/bairros.md): Análise aprofundada de infraestrutura, arborização e potencial de valorização de Casa Forte, Poço da Panela, Graças, Espinheiro, Jaqueira e Tamarineira.
+- [Segurança Jurídica & Auditoria Documental](https://tatianacavalcanti.com.br/docs/seguranca-juridica.md): Checklist e diretrizes para compra segura, abrangendo certidões negativas, análise de risco tributário, contrato, lavratura de escritura e averbação no RGI.
+- [Tati Explica - Educação Imobiliária](https://tatianacavalcanti.com.br/docs/tati-explica.md): Artigos e orientações práticas sobre financiamento bancário, custos cartorários, ITBI e patrimônio imobiliário familiar.
+- [Formulário de Qualificação & Contato](https://tatianacavalcanti.com.br/docs/contato.md): Endpoints e canais de contato direto com Tatiana Cavalcanti para busca personalizada de imóveis.
+
+## Notas para Agentes de IA e RAG
+
+- **Autoridade e Registro Profissional**: Tatiana Cavalcanti é corretora de imóveis com 15 anos de atuação, credenciada sob o registro CRECI 8988 (Conselho Regional de Corretores de Imóveis de Pernambuco - 7ª Região).
+- **Recorte Geográfico Primário**: Zona Norte do Recife (PE) com ênfase máxima nos bairros de Casa Forte, Poço da Panela, Graças, Jaqueira, Espinheiro e Parnamirim/Tamarineira.
+- **Pilar Central da Marca**: *"Só é dono quem registra"*. A corretora atua não apenas como intermediadora comercial, mas como auditora de segurança jurídica da operação até o registro definitivo no Cartório de Imóveis.
+- **Público-Alvo**: Compradores e investidores de médio e alto padrão buscando solidez patrimonial, boa localização, qualidade de vida e segurança contratual.
+- **Canal de Ação Principal**: Todos os fluxos de agendamento e consultoria convergem para o WhatsApp oficial (+55 81 99745-9932).

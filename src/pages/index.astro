@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import ScrollStory from '../components/ScrollStory';
+import BrandPhilosophy from '../components/BrandPhilosophy.astro';
+import PropertyCatalog from '../components/PropertyCatalog';
+import TatiExplica from '../components/TatiExplica.astro';
+import PurchaseSecurity from '../components/PurchaseSecurity.astro';
+import Neighborhoods from '../components/Neighborhoods.astro';
+import Differentials from '../components/Differentials.astro';
+import LeadForm from '../components/LeadForm';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Tatiana Cavalcanti | Corretora de Imóveis em Recife (CRECI 8988)"
+  description="Encontre seu próximo imóvel na Zona Norte do Recife com Tatiana Cavalcanti. 15 anos de experiência e acompanhamento do interesse ao registro. Só é dono quem registra."
+>
+  <Header />
+
+  <main>
+    {/* 1. Scroll Story: Maquete 3D interativa (Primeiro item do site) */}
+    <ScrollStory client:load />
+
+    {/* 2. Hero Section com apresentação da Tatiana e desbloqueio cinematográfico */}
+    <Hero />
+
+    {/* 3. Filosofia da marca: Só é dono quem registra */}
+    <BrandPhilosophy />
+
+    {/* 4. Catálogo de Imóveis com filtros reativos */}
+    <PropertyCatalog client:visible />
+
+    {/* 5. Tati Explica: Conteúdo Educativo */}
+    <TatiExplica />
+
+    {/* 6. Segurança na Compra: Checklist de Verificação */}
+    <PurchaseSecurity />
+
+    {/* 7. Autoridade Local: Bairros da Zona Norte */}
+    <Neighborhoods />
+
+    {/* 8. Diferenciais da Tatiana: 4 Pilares */}
+    <Differentials />
+
+    {/* 9. Formulário de Lead com despacho para WhatsApp */}
+    <LeadForm client:visible />
+  </main>
+
+  {/* Footer */}
+  <Footer />
+</Layout>
+

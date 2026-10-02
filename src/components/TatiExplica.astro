@@ -1,0 +1,130 @@
+---
+import { Landmark, FileText, Stamp, Scale, MessageSquare, ArrowUpRight } from 'lucide-react';
+
+const topics = [
+  {
+    icon: Landmark,
+    category: 'Crédito Imobiliário',
+    title: 'Financiamento sem surpresas',
+    subtitle: 'Entenda as principais etapas antes de financiar seu imóvel.',
+    details: 'Muitos compradores se assustam com taxas ocultas, seguros obrigatórios e amortizações (SAC vs Price). A Tatiana analisa sua renda e simula nas principais instituições bancárias (Caixa, Itaú, Santander, Bradesco) para encontrar o menor Custo Efetivo Total (CET).'
+  },
+  {
+    icon: FileText,
+    category: 'Segurança Jurídica',
+    title: 'Documentação transparente',
+    subtitle: 'Saiba quais certidões e documentos fazem parte do processo.',
+    details: 'Uma transação segura exige certidões vintenárias do imóvel, negativas de ônus reais, certidões da Receita Federal, Justiça do Trabalho e distribuições cíveis dos vendedores. Nenhuma etapa é ignorada.'
+  },
+  {
+    icon: Stamp,
+    category: 'Propriedade Definitiva',
+    title: 'Por que o registro é tão importante?',
+    subtitle: 'O contrato de gaveta ou escritura não bastam: só é dono quem registra.',
+    details: 'A escritura pública lavrada em cartório de notas formaliza a vontade das partes, mas a propriedade só é juridicamente transmitida perante a lei quando registrada na matrícula do imóvel no Cartório de Registro de Imóveis (RGI).'
+  },
+  {
+    icon: Scale,
+    category: 'Negociação & Fechamento',
+    title: 'Análise de Compra e Venda',
+    subtitle: 'O que você precisa analisar antes de assinar a proposta?',
+    details: 'Prazos de desocupação, estado de conservação, pendências condominiais, ITBI municipal do Recife e cláusulas resolutivas. Uma negociação equilibrada evita conflitos futuros.'
+  }
+];
+
+const whatsappUrl = "https://wa.me/5581997459932?text=Ol%C3%A1%2C%20Tatiana!%20Li%20a%20se%C3%A7%C3%A3o%20Tati%20Explica%20no%20seu%20site%20e%20gostaria%20de%20tirar%20uma%20d%C3%BAvida%20sobre%20o%20processo%20de%20compra.";
+---
+
+<section id="tati-explica" class="py-20 md:py-28 bg-[#F2ECE3] border-t border-[#E5DBD0]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    {/* Section Header */}
+    <div class="max-w-3xl mb-14 scroll-reveal-down">
+      <div class="inline-flex items-center space-x-2 bg-white px-3.5 py-1.5 rounded-full border border-[#E5DBD0] mb-4">
+        <span class="w-2 h-2 rounded-full bg-[#C85A32]" />
+        <span class="text-xs uppercase tracking-widest text-[#4A2E22] font-semibold">
+          Conteúdo Educativo
+        </span>
+      </div>
+
+      <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-[#26160F] leading-tight mb-4">
+        Tati Explica
+      </h2>
+
+      <p class="font-body text-base sm:text-lg text-[#5A544F] leading-relaxed">
+        Comprar um imóvel não precisa ser complicado. Esclareço de forma simples e direta os pontos críticos que garantem a segurança do seu investimento.
+      </p>
+    </div>
+
+    {/* Topic Cards Grid */}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-12">
+      {topics.map((t, index) => {
+        const Icon = t.icon;
+        const animDirection = index % 2 === 0 
+          ? (index === 0 ? 'scroll-reveal-left delay-100' : 'scroll-reveal-left delay-300')
+          : (index === 1 ? 'scroll-reveal-right delay-200' : 'scroll-reveal-right delay-400');
+        return (
+          <div class={`bg-white rounded-2xl border border-[#E5DBD0] p-6 sm:p-8 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between card-dynamic ${animDirection}`}>
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-semibold uppercase tracking-wider text-[#C85A32]">
+                  {t.category}
+                </span>
+                <div class="w-10 h-10 rounded-xl bg-[#FAF7F2] border border-[#E5DBD0] flex items-center justify-center text-[#26160F]">
+                  <Icon className="w-5 h-5 text-[#C85A32]" />
+                </div>
+              </div>
+
+              <h3 class="font-display text-xl sm:text-2xl font-semibold text-[#26160F] mb-2">
+                {t.title}
+              </h3>
+
+              <p class="text-sm font-medium text-[#4A2E22] mb-3">
+                {t.subtitle}
+              </p>
+
+              <p class="text-xs sm:text-sm text-[#6E6760] leading-relaxed">
+                {t.details}
+              </p>
+            </div>
+
+            <div class="pt-6 mt-6 border-t border-[#E5DBD0]">
+              <a
+                href={`https://wa.me/5581997459932?text=Ol%C3%A1%2C%20Tatiana!%20Gostaria%20de%20tirar%20uma%20d%C3%BAvida%20sobre%20${encodeURIComponent(t.title)}.`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center space-x-1.5 text-xs font-semibold text-[#C85A32] hover:text-[#AB4823] transition-colors"
+              >
+                <span>Tirar dúvida sobre este tema</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+    {/* Section Banner CTA */}
+    <div class="bg-[#26160F] rounded-3xl p-8 sm:p-10 text-white flex flex-col sm:flex-row items-center justify-between gap-6 scroll-reveal-up delay-200 card-dynamic">
+      <div>
+        <h3 class="font-display text-xl sm:text-2xl font-medium mb-2">
+          Tem alguma dúvida sobre documentação ou financiamento?
+        </h3>
+        <p class="text-sm text-white/70 max-w-xl">
+          Fale diretamente com quem acompanha processos imobiliários na prática há 15 anos. Atendimento sem compromisso.
+        </p>
+      </div>
+
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center space-x-2 bg-[#C85A32] hover:bg-[#AB4823] text-white px-7 py-4 rounded-xl text-sm font-semibold transition-all duration-200 shrink-0 touch-target active:scale-95 shadow-lg shadow-[#C85A32]/25"
+      >
+        <MessageSquare className="w-4 h-4" />
+        <span>Quero tirar uma dúvida</span>
+      </a>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,147 @@
+---
+import { ShieldCheck, MessageSquare } from 'lucide-react';
+
+const navLinks = [
+  { label: 'Imóveis', href: '#imoveis' },
+  { label: 'Tati Explica', href: '#tati-explica' },
+  { label: 'Segurança', href: '#seguranca' },
+  { label: 'Regiões', href: '#regioes' },
+  { label: 'Contato', href: '#contato' },
+];
+
+const whatsappUrl = "https://wa.me/5581997459932?text=Ol%C3%A1%2C%20Tatiana!%20Vi%20seu%20site%20e%20gostaria%20de%20ajuda%20para%20encontrar%20um%20im%C3%B3vel.";
+const instagramUrl = "https://instagram.com/tatianacavalcanti.imoveis";
+---
+
+<header class="sticky top-0 z-50 w-full bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E5DBD0] transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      
+      <!-- Brand Logo & CRECI Badge with Social Icons alongside -->
+      <div class="flex items-center space-x-2.5 sm:space-x-3.5">
+        <a href="#" class="flex flex-col group py-2">
+          <div class="flex items-center space-x-2">
+            <span class="font-display text-lg sm:text-2xl font-semibold tracking-tight text-[#26160F] group-hover:text-[#C85A32] transition-colors leading-tight">
+              TATIANA CAVALCANTI
+            </span>
+          </div>
+          <div class="flex items-center space-x-2 text-[10px] sm:text-[11px] text-[#6E6760] font-medium tracking-wider uppercase">
+            <span>Corretora de Imóveis</span>
+            <span>•</span>
+            <span class="text-[#C85A32] font-semibold">CRECI 8988</span>
+          </div>
+        </a>
+
+        <!-- Social Icons beside Tatiana Cavalcanti on Web and Mobile -->
+        <div class="flex items-center space-x-1 sm:space-x-1.5">
+          <a
+            href={instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white/70 hover:bg-white border border-[#E5DBD0] flex items-center justify-center text-[#4A2E22] hover:text-[#C85A32] transition-colors shadow-2xs"
+            aria-label="Instagram"
+            title="Instagram @tatianacavalcanti.imoveis"
+          >
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+            </svg>
+          </a>
+
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white/70 hover:bg-white border border-[#E5DBD0] flex items-center justify-center text-[#4A2E22] hover:text-[#C85A32] transition-colors shadow-2xs"
+            aria-label="WhatsApp"
+            title="WhatsApp"
+          >
+            <MessageSquare className="w-3.5 h-3.5" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-8">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-sm font-medium text-[#4A2E22] hover:text-[#C85A32] transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#C85A32] hover:after:w-full after:transition-all after:duration-200"
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <div class="flex items-center md:hidden">
+        <button
+          id="mobile-menu-btn"
+          type="button"
+          class="inline-flex items-center justify-center p-2 rounded-xl text-[#26160F] hover:bg-[#E5DBD0]/50 touch-target focus:outline-none"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+        >
+          <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-[#FAF7F2] border-b border-[#E5DBD0] px-4 pt-4 pb-8 space-y-3 transition-all duration-300">
+    <div class="flex flex-col space-y-2">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="mobile-nav-link text-base font-medium text-[#26160F] hover:text-[#C85A32] hover:bg-[#F2ECE3] px-3 py-3 rounded-lg transition-colors"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <div class="pt-4 border-t border-[#E5DBD0] flex items-center justify-center space-x-2 text-xs text-[#6E6760]">
+      <ShieldCheck className="w-3.5 h-3.5 text-[#C85A32]" />
+      <span>Atendimento consultivo e seguro • CRECI 8988</span>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const openIcon = document.getElementById('menu-icon-open');
+  const closeIcon = document.getElementById('menu-icon-close');
+  const links = document.querySelectorAll('.mobile-nav-link');
+
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', (!isExpanded).toString());
+      menu.classList.toggle('hidden');
+      if (openIcon && closeIcon) {
+        openIcon.classList.toggle('hidden');
+        closeIcon.classList.toggle('hidden');
+      }
+    });
+
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        if (openIcon && closeIcon) {
+          openIcon.classList.remove('hidden');
+          closeIcon.classList.add('hidden');
+        }
+      });
+    });
+  }
+</script>

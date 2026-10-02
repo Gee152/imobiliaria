@@ -1,0 +1,109 @@
+---
+import { ShieldCheck, FileCheck, KeyRound } from 'lucide-react';
+---
+
+<section class="relative py-24 sm:py-32 bg-[#23150F] text-[#FAF7F2] overflow-hidden">
+  {/* Atmospheric architectural watermark with Parallax */}
+  <div class="absolute -right-24 -bottom-24 w-96 h-96 rounded-full bg-[#C85A32]/10 blur-3xl pointer-events-none" data-parallax="0.12" />
+  <div class="absolute -left-24 -top-24 w-96 h-96 rounded-full bg-[#351F16]/50 blur-3xl pointer-events-none" data-parallax="-0.12" />
+
+  <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    
+    {/* Subtle seal */}
+    <div class="inline-flex items-center justify-center p-3 rounded-2xl bg-white/5 border border-white/10 mb-8 scroll-reveal-down">
+      <ShieldCheck className="w-8 h-8 text-[#C85A32]" />
+    </div>
+
+    {/* Section Eyebrow */}
+    <span class="block text-xs uppercase tracking-[0.3em] font-semibold text-[#C85A32] mb-4 scroll-reveal-down delay-75">
+      Filosofia Proprietária
+    </span>
+
+    {/* Big Hero Quote */}
+    <blockquote class="font-display text-3xl sm:text-5xl lg:text-6xl font-medium tracking-tight text-[#FAF7F2] leading-tight mb-8 scroll-reveal-up delay-150">
+      “Só é dono quem <span class="italic text-[#C85A32] font-normal">registra</span>.”
+    </blockquote>
+
+    {/* Narrative Paragraph */}
+    <p class="font-body text-base sm:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed mb-12 scroll-reveal-up delay-200">
+      Comprar um imóvel vai muito além de assinar uma promessa de compra e venda. Segurança jurídica significa entender cada certidão, antecipar riscos tributários e garantir que o cartório formalize a sua posse como propriedade plena.
+    </p>
+
+    {/* 3 Step Badge Flow - Mobile Slide / Desktop Grid */}
+    <div class="relative max-w-4xl mx-auto pt-6 border-t border-white/10">
+      <div
+        id="philosophy-slider"
+        class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 gap-4 pb-2 sm:pb-0 sm:grid sm:grid-cols-3 sm:gap-6 sm:overflow-visible"
+      >
+        <div class="w-[82vw] max-w-[320px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink sm:snap-align-none p-6 rounded-2xl bg-white/[0.03] border border-white/10 text-left flex flex-col justify-between scroll-reveal-left delay-100 card-dynamic hover:border-[#C85A32]/40">
+          <div>
+            <div class="text-[#C85A32] font-mono text-xs font-semibold mb-2">01. DECISÃO</div>
+            <h3 class="font-display text-lg text-white mb-2">Interesse & Seleção</h3>
+            <p class="text-xs text-white/60 leading-relaxed">
+              Encontrar o endereço ideal e conferir a real situação legal e estrutural do imóvel.
+            </p>
+          </div>
+        </div>
+
+        <div class="w-[82vw] max-w-[320px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink sm:snap-align-none p-6 rounded-2xl bg-white/[0.03] border border-white/10 text-left flex flex-col justify-between scroll-reveal-down delay-200 card-dynamic hover:border-[#C85A32]/40">
+          <div>
+            <div class="text-[#C85A32] font-mono text-xs font-semibold mb-2">02. SEGURANÇA</div>
+            <h3 class="font-display text-lg text-white mb-2">Documentação & Crédito</h3>
+            <p class="text-xs text-white/60 leading-relaxed">
+              Auditoria de certidões negativas, estruturação do contrato e aprovação de financiamento.
+            </p>
+          </div>
+        </div>
+
+        <div class="w-[82vw] max-w-[320px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink sm:snap-align-none p-6 rounded-2xl bg-white/[0.03] border border-white/10 text-left flex flex-col justify-between scroll-reveal-right delay-300 card-dynamic hover:border-[#C85A32]/40">
+          <div>
+            <div class="text-[#C85A32] font-mono text-xs font-semibold mb-2">03. PATRIMÔNIO</div>
+            <h3 class="font-display text-lg text-white mb-2">Escritura & Registro</h3>
+            <p class="text-xs text-white/60 leading-relaxed">
+              Lavratura no Cartório de Notas e averbação no Cartório de Registro de Imóveis (RGI).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Slide Dots Indicator */}
+      <div class="flex sm:hidden items-center justify-center space-x-2 mt-4" aria-hidden="true">
+        <span class="w-6 h-1.5 rounded-full bg-[#C85A32] transition-all duration-300 philosophy-dot"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-white/20 transition-all duration-300 philosophy-dot"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-white/20 transition-all duration-300 philosophy-dot"></span>
+      </div>
+    </div>
+
+    {/* Bottom statement */}
+    <div class="mt-12 text-xs uppercase tracking-widest text-white/40">
+      Tatiana Cavalcanti • CRECI 8988 • Te guio do interesse ao registro
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const slider = document.getElementById('philosophy-slider');
+  const dots = document.querySelectorAll('.philosophy-dot');
+
+  if (slider && dots.length > 0) {
+    slider.addEventListener('scroll', () => {
+      const scrollPosition = slider.scrollLeft;
+      const cardWidth = (slider.firstElementChild as HTMLElement)?.clientWidth || 300;
+      const activeIndex = Math.min(
+        dots.length - 1,
+        Math.max(0, Math.round(scrollPosition / (cardWidth + 16)))
+      );
+      
+      dots.forEach((dot, index) => {
+        if (index === activeIndex) {
+          dot.classList.add('bg-[#C85A32]', 'w-6');
+          dot.classList.remove('bg-white/20', 'w-1.5');
+        } else {
+          dot.classList.remove('bg-[#C85A32]', 'w-6');
+          dot.classList.add('bg-white/20', 'w-1.5');
+        }
+      });
+    }, { passive: true });
+  }
+</script>

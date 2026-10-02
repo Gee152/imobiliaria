@@ -1,0 +1,158 @@
+---
+import { MessageSquare, ShieldCheck, Phone, MapPin, ArrowUp } from 'lucide-react';
+
+const currentYear = new Date().getFullYear();
+const whatsappUrl = "https://wa.me/5581997459932?text=Ol%C3%A1%2C%20Tatiana!%20Vi%20seu%20site%20e%20gostaria%20de%20conversar.";
+const instagramUrl = "https://instagram.com/tatianacavalcanti.imoveis";
+---
+
+<footer class="bg-[#1A0E09] text-[#FAF7F2] border-t border-[#351F16] pt-16 pb-24 md:pb-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    {/* Main Grid */}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 pb-12 sm:pb-16 border-b border-white/10 scroll-reveal-up">
+      
+      {/* Brand & Signature Column */}
+      <div class="lg:col-span-5 space-y-4">
+        <div class="flex items-center gap-3 sm:gap-4 flex-wrap">
+          <a href="#" class="inline-block">
+            <span class="font-display text-2xl font-semibold tracking-tight text-white block">
+              TATIANA CAVALCANTI
+            </span>
+            <span class="text-xs uppercase tracking-widest text-[#C85A32] font-semibold block">
+              Corretora de Imóveis • CRECI 8988
+            </span>
+          </a>
+
+          {/* Social Icons beside Tatiana Cavalcanti on Web and Mobile */}
+          <div class="flex items-center space-x-2">
+            <a
+              href={instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/80 hover:text-[#C85A32] hover:bg-white/10 transition-colors touch-target"
+              aria-label="Instagram"
+              title="Instagram @tatianacavalcanti.imoveis"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+              </svg>
+            </a>
+
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/80 hover:text-[#C85A32] hover:bg-white/10 transition-colors touch-target"
+              aria-label="WhatsApp"
+              title="WhatsApp Tatiana Cavalcanti"
+            >
+              <MessageSquare className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+
+        <p class="font-display text-lg italic text-white/90 max-w-sm pt-1">
+          “Só é dono quem registra.”
+        </p>
+
+        <p class="font-body text-xs sm:text-sm text-white/60 leading-relaxed max-w-sm">
+          15 anos ajudando você a transformar uma escolha imobiliária em patrimônio seguro na Zona Norte do Recife.
+        </p>
+      </div>
+
+      {/* Information Columns: 2 Columns on Mobile, Spans 7 cols on Desktop */}
+      <div class="grid grid-cols-2 gap-4 sm:gap-8 lg:col-span-7 lg:grid-cols-7 pt-2 lg:pt-0">
+        
+        {/* Navigation Quick Links */}
+        <div class="lg:col-span-3 space-y-3">
+          <span class="text-xs uppercase tracking-widest text-[#C85A32] font-semibold block mb-3">
+            Navegação
+          </span>
+          <ul class="space-y-2 text-xs sm:text-sm text-white/70">
+            <li><a href="#imoveis" class="hover:text-white transition-colors block py-0.5">Catálogo de Imóveis</a></li>
+            <li><a href="#maquete" class="hover:text-white transition-colors block py-0.5">Experiência Maquete</a></li>
+            <li><a href="#tati-explica" class="hover:text-white transition-colors block py-0.5">Tati Explica</a></li>
+            <li><a href="#seguranca" class="hover:text-white transition-colors block py-0.5">Segurança Jurídica</a></li>
+            <li><a href="#regioes" class="hover:text-white transition-colors block py-0.5">Bairros Atendidos</a></li>
+            <li><a href="#contato" class="hover:text-white transition-colors block py-0.5">Contato Direto</a></li>
+          </ul>
+        </div>
+
+        {/* Contact & Legal Region */}
+        <div class="lg:col-span-4 space-y-3">
+          <span class="text-xs uppercase tracking-widest text-[#C85A32] font-semibold block mb-3">
+            Atendimento Direto
+          </span>
+
+          <div class="space-y-3 text-xs sm:text-sm text-white/80">
+            <div class="flex items-start space-x-2 sm:space-x-3">
+              <Phone className="w-4 h-4 text-[#C85A32] shrink-0 mt-0.5" />
+              <div class="min-w-0">
+                <span class="block text-[10px] text-white/50">WhatsApp / Tel</span>
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="hover:text-[#C85A32] font-medium text-[11px] sm:text-xs md:text-sm block truncate sm:whitespace-normal">
+                  (81) 99745-9932
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-2 sm:space-x-3">
+              <svg class="w-4 h-4 text-[#C85A32] shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+              </svg>
+              <div class="min-w-0">
+                <span class="block text-[10px] text-white/50">Instagram</span>
+                <a href={instagramUrl} target="_blank" rel="noopener noreferrer" class="hover:text-[#C85A32] font-medium text-[11px] sm:text-xs md:text-sm block truncate sm:whitespace-normal" title="@tatianacavalcanti.imoveis">
+                  @tatianacavalcanti.imoveis
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-2 sm:space-x-3">
+              <MapPin className="w-4 h-4 text-[#C85A32] shrink-0 mt-0.5" />
+              <div class="min-w-0">
+                <span class="block text-[10px] text-white/50">Região Principal</span>
+                <span class="text-[11px] sm:text-xs md:text-sm block text-white/80">Zona Norte Recife</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-2 hidden sm:block">
+            <div class="p-3 rounded-xl bg-white/[0.04] border border-white/10 text-xs text-white/60">
+              <span class="text-white/90 font-medium block mb-0.5">Segurança Jurídica:</span>
+              Acompanhamento profissional credenciado sob o CRECI 8988 (Conselho Regional de Corretores de Imóveis de Pernambuco).
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Bottom Legal & Copyright Bar */}
+    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50">
+      <div>
+        © <span id="current-year">{currentYear}</span> Tatiana Cavalcanti Imóveis • CRECI 8988. Todos os direitos reservados.
+      </div>
+
+      <div class="flex items-center space-x-6">
+        <a href="#politica" class="hover:text-white transition-colors">Política de Privacidade</a>
+        <a href="#termos" class="hover:text-white transition-colors">Termos de Uso</a>
+        <a href="#" class="inline-flex items-center space-x-1 hover:text-white transition-colors" title="Voltar ao topo">
+          <span>Topo</span>
+          <ArrowUp className="w-3.5 h-3.5" />
+        </a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<script>
+  const yearEl = document.getElementById('current-year');
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear().toString();
+  }
+</script>

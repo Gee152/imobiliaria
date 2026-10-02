@@ -1,0 +1,143 @@
+---
+import { Calendar, Users, MapPin, Compass, Check } from 'lucide-react';
+
+const pillars = [
+  {
+    num: '01',
+    title: 'Experiência',
+    headline: '15 anos de mercado imobiliário',
+    desc: 'Vivência prática em diferentes ciclos de mercado no Recife, conhecendo os lançamentos, as construtoras sólidas e o histórico dos edifícios.',
+    icon: Calendar
+  },
+  {
+    num: '02',
+    title: 'Atendimento',
+    headline: 'Acompanhamento próximo em cada etapa',
+    desc: 'Você não conversa com estagiários ou atendentes robôs. O atendimento é conduzido pessoalmente por Tatiana Cavalcanti do início ao fim.',
+    icon: Users
+  },
+  {
+    num: '03',
+    title: 'Conhecimento',
+    headline: 'Atuação na Zona Norte do Recife',
+    desc: 'Especialização geográfica refinada para indicar não apenas um metro quadrado, mas a rua, a insolação e a qualidade de vida exata para você.',
+    icon: MapPin
+  },
+  {
+    num: '04',
+    title: 'Orientação',
+    headline: 'Do interesse ao registro',
+    desc: 'O compromisso não acaba com o aperto de mão da proposta. Proteção contratual e presença ativa até a expedição da matrícula imobiliária.',
+    icon: Compass
+  }
+];
+---
+
+<section class="py-20 md:py-28 bg-[#FAF7F2]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="text-center max-w-3xl mx-auto mb-16 scroll-reveal-down">
+      <div class="inline-flex items-center space-x-2 bg-[#F2ECE3] px-3.5 py-1.5 rounded-full border border-[#E5DBD0] mb-4">
+        <span class="w-2 h-2 rounded-full bg-[#C85A32]" />
+        <span class="text-xs uppercase tracking-widest text-[#4A2E22] font-semibold">
+          Por que Tatiana Cavalcanti
+        </span>
+      </div>
+
+      <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-[#26160F] leading-tight mb-4">
+        Quatro pilares que sustentam a sua tranquilidade
+      </h2>
+
+      <p class="font-body text-base text-[#6E6760] leading-relaxed">
+        Uma postura consultiva que une técnica jurídica, sensibilidade humana e profundo domínio do território recifense.
+      </p>
+    </div>
+
+    {/* 4 Pillars - Mobile Horizontal Snap Slider / Desktop Grid */}
+    <div class="relative">
+      <div 
+        id="pillars-slider"
+        class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 gap-4 pb-2 sm:pb-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 sm:overflow-visible"
+      >
+        {pillars.map((p, index) => {
+          const Icon = p.icon;
+          const animClass = index === 0 
+            ? 'scroll-reveal-left delay-100' 
+            : index === 1 
+            ? 'scroll-reveal-down delay-200' 
+            : index === 2 
+            ? 'scroll-reveal-up delay-300' 
+            : 'scroll-reveal-right delay-400';
+          return (
+            <div 
+              class={`w-[84vw] max-w-[320px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink sm:snap-align-none bg-white rounded-2xl border border-[#E5DBD0] p-6 sm:p-7 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between card-dynamic ${animClass}`}
+            >
+              <div>
+                <div class="flex items-center justify-between mb-5 sm:mb-6">
+                  <span class="font-mono text-2xl font-bold text-[#E5DBD0]">
+                    {p.num}
+                  </span>
+                  <div class="w-10 h-10 rounded-xl bg-[#FAF7F2] border border-[#E5DBD0] flex items-center justify-center text-[#C85A32]">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                </div>
+
+                <span class="text-xs uppercase tracking-widest font-semibold text-[#C85A32] block mb-1">
+                  {p.title}
+                </span>
+
+                <h3 class="font-display text-lg font-semibold text-[#26160F] mb-3 leading-snug">
+                  {p.headline}
+                </h3>
+
+                <p class="text-xs sm:text-sm text-[#6E6760] leading-relaxed">
+                  {p.desc}
+                </p>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-[#FAF7F2] flex items-center space-x-1.5 text-xs text-[#26160F] font-semibold">
+                <Check className="w-3.5 h-3.5 text-[#C85A32]" />
+                <span>Garantia de acompanhamento</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Mobile Slide Dots Indicator */}
+      <div class="flex sm:hidden items-center justify-center space-x-2 mt-6" aria-hidden="true">
+        <span class="w-6 h-1.5 rounded-full bg-[#C85A32] transition-all duration-300 pillar-dot"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-[#E5DBD0] transition-all duration-300 pillar-dot"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-[#E5DBD0] transition-all duration-300 pillar-dot"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-[#E5DBD0] transition-all duration-300 pillar-dot"></span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const slider = document.getElementById('pillars-slider');
+  const dots = document.querySelectorAll('.pillar-dot');
+
+  if (slider && dots.length > 0) {
+    slider.addEventListener('scroll', () => {
+      const scrollPosition = slider.scrollLeft;
+      const cardWidth = (slider.firstElementChild as HTMLElement)?.clientWidth || 300;
+      const activeIndex = Math.min(
+        dots.length - 1,
+        Math.max(0, Math.round(scrollPosition / (cardWidth + 16)))
+      );
+      
+      dots.forEach((dot, index) => {
+        if (index === activeIndex) {
+          dot.classList.add('bg-[#C85A32]', 'w-6');
+          dot.classList.remove('bg-[#E5DBD0]', 'w-1.5');
+        } else {
+          dot.classList.remove('bg-[#C85A32]', 'w-6');
+          dot.classList.add('bg-[#E5DBD0]', 'w-1.5');
+        }
+      });
+    }, { passive: true });
+  }
+</script>

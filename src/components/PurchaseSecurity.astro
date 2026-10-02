@@ -1,0 +1,113 @@
+---
+import { CheckCircle2, ShieldCheck, FileSearch, HandCoins, FileSignature, Award } from 'lucide-react';
+
+const steps = [
+  {
+    step: '01',
+    icon: FileSearch,
+    title: 'Documentação do Imóvel & Proprietários',
+    desc: 'Verificação de certidões vintenárias com negativa de ônus, quitação de IPTU/taxa de bombeiros e regularidade fiscal e jurídica dos vendedores.'
+  },
+  {
+    step: '02',
+    icon: HandCoins,
+    title: 'Negociação Transparente & Estruturada',
+    desc: 'Alinhamento justo entre comprador e vendedor sobre forma de pagamento, prazos de entrega e condições resolutivas.'
+  },
+  {
+    step: '03',
+    icon: ShieldCheck,
+    title: 'Financiamento Imobiliário Conduzido',
+    desc: 'Simulação comparativa entre instituições financeiras, encaminhamento de pasta de crédito e acompanhamento da avaliação do engenheiro.'
+  },
+  {
+    step: '04',
+    icon: FileSignature,
+    title: 'Contrato com Rigor Técnico',
+    desc: 'Elaboração e revisão minuciosa de instrumentos particulares ou minutas de escrituras públicas, sem cláusulas abusivas ou ambíguas.'
+  },
+  {
+    step: '05',
+    icon: Award,
+    title: 'Averbação no Cartório de Registro (RGI)',
+    desc: 'Acompanhamento do recolhimento do ITBI municipal de Recife, lavratura no Tabelionato de Notas e registro da matrícula definitiva.'
+  }
+];
+---
+
+<section id="seguranca" class="py-20 md:py-28 bg-[#FAF7F2]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      
+      {/* Left Text & Value Prop */}
+      <div class="lg:col-span-5 scroll-reveal-left">
+        <div class="inline-flex items-center space-x-2 bg-[#F2ECE3] px-3.5 py-1.5 rounded-full border border-[#E5DBD0] mb-4">
+          <span class="w-2 h-2 rounded-full bg-[#C85A32]" />
+          <span class="text-xs uppercase tracking-widest text-[#4A2E22] font-semibold">
+            Segurança na Compra
+          </span>
+        </div>
+
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-[#26160F] leading-tight mb-6">
+          Comprar bem também é saber o que verificar.
+        </h2>
+
+        <p class="font-body text-base sm:text-lg text-[#5A544F] leading-relaxed mb-6">
+          Meu papel é ajudar você a entender cada etapa para tomar decisões com mais clareza e segurança.
+        </p>
+
+        <p class="font-body text-sm text-[#6E6760] leading-relaxed mb-8">
+          A aquisição de um imóvel é um dos maiores movimentos patrimoniais de uma família. Por isso, nenhuma assinatura acontece antes de cada ponto do checklist estar devidamente apurado.
+        </p>
+
+        <div class="p-5 rounded-2xl bg-[#F2ECE3] border border-[#E5DBD0] space-y-3 card-dynamic">
+          <div class="flex items-center space-x-2.5 text-xs sm:text-sm font-semibold text-[#26160F]">
+            <CheckCircle2 className="w-4 h-4 text-[#C85A32]" />
+            <span>Sem surpresas financeiras ou cartorárias</span>
+          </div>
+          <div class="flex items-center space-x-2.5 text-xs sm:text-sm font-semibold text-[#26160F]">
+            <CheckCircle2 className="w-4 h-4 text-[#C85A32]" />
+            <span>Acompanhamento presencial em cartórios no Recife</span>
+          </div>
+          <div class="flex items-center space-x-2.5 text-xs sm:text-sm font-semibold text-[#26160F]">
+            <CheckCircle2 className="w-4 h-4 text-[#C85A32]" />
+            <span>Orientação contínua do primeiro contato à entrega das chaves</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Column: Visual Vertical Stepper Checklist */}
+      <div class="lg:col-span-7">
+        <div class="space-y-4">
+          {steps.map((s, index) => {
+            const Icon = s.icon;
+            const animClass = index % 2 === 0
+              ? `scroll-reveal-right delay-${(index + 1) * 100}`
+              : `scroll-reveal-down delay-${(index + 1) * 100}`;
+            return (
+              <div 
+                class={`bg-white p-5 sm:p-6 rounded-2xl border border-[#E5DBD0] shadow-xs hover:border-[#C85A32]/50 transition-colors flex items-start space-x-4 card-dynamic ${animClass}`}
+              >
+                <div class="w-10 h-10 rounded-xl bg-[#FAF7F2] border border-[#E5DBD0] flex items-center justify-center text-[#C85A32] shrink-0 font-mono text-xs font-bold">
+                  {s.step}
+                </div>
+
+                <div class="flex-1">
+                  <h3 class="text-base font-semibold text-[#26160F] mb-1">
+                    {s.title}
+                  </h3>
+                  <p class="text-xs sm:text-sm text-[#6E6760] leading-relaxed">
+                    {s.desc}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>

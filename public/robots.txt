@@ -1,0 +1,53 @@
+# robots.txt para Tatiana Cavalcanti Imóveis
+# https://tatianacavalcanti.com.br
+
+# -------------------------------------------------------------
+# Regras Gerais para Motores de Busca (Google, Bing, etc.)
+# -------------------------------------------------------------
+User-agent: *
+Allow: /
+
+# Bloqueio de rotas privadas, endpoints e assets de build internos
+Disallow: /api/
+Disallow: /_astro/
+Disallow: /admin/
+Disallow: /privado/
+Disallow: /drafts/
+
+# -------------------------------------------------------------
+# Bloqueio de Scrapers e Rastreadores de Treinamento de IA
+# -------------------------------------------------------------
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Claude-Bot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+# -------------------------------------------------------------
+# Localização do Sitemap XML
+# -------------------------------------------------------------
+Sitemap: https://tatianacavalcanti.com.br/sitemap.xml
