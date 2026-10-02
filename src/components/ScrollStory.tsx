@@ -68,35 +68,82 @@ export default function ScrollStory() {
   const progressPercentRef = useRef<HTMLSpanElement>(null);
   const scrollPromptRef = useRef<HTMLDivElement>(null);
   const activeStepIndexRef = useRef<number>(0);
-  const hasVideoFileRef = useRef<boolean>(false);
+  const isVideoFrameDecodedRef = useRef<boolean>(false);
 
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [hasVideoFile, setHasVideoFile] = useState(false);
+  const [isVideoFrameDecoded, setIsVideoFrameDecoded] = useState(false);
 
-  // Check if custom video exists in /video/maquete.mp4
+  // Initialize and prime video decoder for iOS Safari & Low Power Mode
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
+    // WebKit strictly requires muted + defaultMuted + playsinline attributes on DOM
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute('playsinline', 'true');
+    video.setAttribute('webkit-playsinline', 'true');
+
+    // Draw initial 3D blueprint immediately so canvas is never blank
+    drawArchitecturalCanvas(0);
+
     const markVideoReady = () => {
-      if (video.duration && !isNaN(video.duration) && video.duration > 0) {
-        hasVideoFileRef.current = true;
-        setHasVideoFile(true);
+      if (video.readyState >= 2 && !isVideoFrameDecodedRef.current) {
+        isVideoFrameDecodedRef.current = true;
+        setIsVideoFrameDecoded(true);
       }
     };
 
-    if (video.readyState >= 1 && video.duration) {
+    // Prime hardware video decoder on iOS / WebKit
+    const primeDecoder = () => {
+      if (video && video.paused) {
+        video.muted = true;
+        video.defaultMuted = true;
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              // Pause immediately so scroll position drives currentTime
+              video.pause();
+              markVideoReady();
+            })
+            .catch(() => {
+              // Low power mode or autoplay restriction may reject before gesture;
+              // interaction listener below handles this on first touch
+            });
+        }
+      }
+    };
+
+    if (video.readyState >= 2) {
       markVideoReady();
+    } else {
+      primeDecoder();
     }
 
-    video.addEventListener('loadedmetadata', markVideoReady);
     video.addEventListener('loadeddata', markVideoReady);
     video.addEventListener('canplay', markVideoReady);
+    video.addEventListener('playing', markVideoReady);
+
+    // iOS Low Power Mode unlocking on first interaction (touch/scroll)
+    const onFirstInteraction = () => {
+      primeDecoder();
+      window.removeEventListener('touchstart', onFirstInteraction);
+      window.removeEventListener('scroll', onFirstInteraction);
+      window.removeEventListener('pointerdown', onFirstInteraction);
+    };
+    window.addEventListener('touchstart', onFirstInteraction, { passive: true });
+    window.addEventListener('scroll', onFirstInteraction, { passive: true });
+    window.addEventListener('pointerdown', onFirstInteraction, { passive: true });
 
     return () => {
-      video.removeEventListener('loadedmetadata', markVideoReady);
       video.removeEventListener('loadeddata', markVideoReady);
       video.removeEventListener('canplay', markVideoReady);
+      video.removeEventListener('playing', markVideoReady);
+      window.removeEventListener('touchstart', onFirstInteraction);
+      window.removeEventListener('scroll', onFirstInteraction);
+      window.removeEventListener('pointerdown', onFirstInteraction);
     };
   }, []);
 
@@ -107,6 +154,7 @@ export default function ScrollStory() {
     let currentSmoothProgress = 0;
     let isSeeking = false;
     let pendingSeekTime: number | null = null;
+    let seekWatchdogTimer: ReturnType<typeof setTimeout> | null = null;
 
     const handleScroll = () => {
       const container = containerRef.current;
@@ -122,7 +170,7 @@ export default function ScrollStory() {
       targetProgress = Math.min(Math.max(scrolledDistance / totalScrollableDistance, 0), 1);
     };
 
-    // Video frame seek manager: avoids aborting in-flight seeks (root cause of video stuttering)
+    // Video frame seek manager: avoids aborting in-flight seeks + watchdog recovery for iOS
     const applyVideoSeek = (targetTime: number) => {
       const video = videoRef.current;
       if (!video || !video.duration || isNaN(video.duration)) return;
@@ -140,11 +188,35 @@ export default function ScrollStory() {
 
       isSeeking = true;
       pendingSeekTime = null;
-      video.currentTime = clampedTime;
+
+      try {
+        video.currentTime = clampedTime;
+      } catch {
+        isSeeking = false;
+      }
+
+      // Safety watchdog: iOS Safari can throttle or drop 'seeked' events under load or in Low Power Mode
+      if (seekWatchdogTimer) clearTimeout(seekWatchdogTimer);
+      seekWatchdogTimer = setTimeout(() => {
+        isSeeking = false;
+        if (pendingSeekTime !== null) {
+          const next = pendingSeekTime;
+          pendingSeekTime = null;
+          applyVideoSeek(next);
+        }
+      }, 120);
     };
 
     const handleSeeked = () => {
       isSeeking = false;
+      if (seekWatchdogTimer) clearTimeout(seekWatchdogTimer);
+
+      const video = videoRef.current;
+      if (video && video.readyState >= 2 && !isVideoFrameDecodedRef.current) {
+        isVideoFrameDecodedRef.current = true;
+        setIsVideoFrameDecoded(true);
+      }
+
       if (pendingSeekTime !== null) {
         const next = pendingSeekTime;
         pendingSeekTime = null;
@@ -196,8 +268,8 @@ export default function ScrollStory() {
         applyVideoSeek(currentSmoothProgress * video.duration);
       }
 
-      // 6. Only execute procedural canvas math if no video file is active
-      if (!hasVideoFileRef.current) {
+      // 6. Draw procedural 3D canvas (always active as fallback / while video decodes)
+      if (!isVideoFrameDecodedRef.current) {
         drawArchitecturalCanvas(currentSmoothProgress);
       }
 
@@ -213,6 +285,7 @@ export default function ScrollStory() {
       if (video) {
         video.removeEventListener('seeked', handleSeeked);
       }
+      if (seekWatchdogTimer) clearTimeout(seekWatchdogTimer);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -436,29 +509,30 @@ export default function ScrollStory() {
         
         {/* Background Visual Layer: Real Video scrubbing if present + Procedural Canvas Engine */}
         <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
-          {/* Native Video player ready for maquete.mp4 */}
+          {/* Native Video player ready for maquete.mp4 with iOS WebKit optimizations */}
           <video
             ref={videoRef}
-            src="/video/maquete.mp4"
+            src="/video/maquete.mp4#t=0.001"
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 pointer-events-none ${
-              hasVideoFile ? 'opacity-100' : 'opacity-0'
+              isVideoFrameDecoded ? 'opacity-100' : 'opacity-0'
             }`}
             muted
             playsInline
+            autoPlay
             preload="auto"
             disablePictureInPicture
             disableRemotePlayback
           />
 
-          {/* Procedural Canvas Layer (used when video file is not loaded) */}
-          {!hasVideoFile && (
-            <canvas
-              ref={canvasRef}
-              width={800}
-              height={700}
-              className="w-full max-w-2xl h-auto aspect-square object-contain opacity-95 transition-transform duration-300 -translate-y-8 sm:-translate-y-12"
-            />
-          )}
+          {/* Procedural Canvas Layer: ALWAYS rendered so iPhone Low Power Mode never sees a black screen */}
+          <canvas
+            ref={canvasRef}
+            width={800}
+            height={700}
+            className={`w-full max-w-2xl h-auto aspect-square object-contain transition-opacity duration-700 -translate-y-8 sm:-translate-y-12 ${
+              isVideoFrameDecoded ? 'opacity-0 pointer-events-none' : 'opacity-95'
+            }`}
+          />
 
           {/* Cinematic gradient scrim: balanced across the full height for crystal clear centered text */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/40 to-black/85 pointer-events-none" />
